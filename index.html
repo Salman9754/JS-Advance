@@ -6,23 +6,58 @@
     <title>Document</title>
   </head>
   <style>
-    .container {
-      height: 500px;
-      background-color: aqua;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      flex-direction: column;
-      font-weight: bold;
-      font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+    *{
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     }
   </style>
 
   <body>
-    <h1>Hello world</h1>
-    <button id="start">Start</button>
-    <button id="stop">Stop</button>
+    <select name="menu" id="menu">
+      <option value="all" selected>All</option>
+      <option value="completed">Completed</option>
+      <option value="notCompleted">Not Completed</option>
+    </select>
+    <button onclick="getData()">Search</button>
+    <ul id="list"></ul>
 
-    <div class="container" id="container"></div>
+    <script>
+      let ulList = document.getElementById("list");
+
+      function getData() {
+        let selectedValue = document.getElementById("menu").value;
+        async function fetchData() {
+          try {
+            const todoData = await fetch("https://dummyjson.com/todos");
+            const todoDataJson = await todoData.json();
+            const todos = await todoDataJson.todos;
+            ulList.innerHTML = "";
+            if (selectedValue === "all") {
+              todos.map((list) => {
+                return (ulList.innerHTML += `<li> ${list.todo} </li>`);
+              });
+            }
+            if (selectedValue === "completed") {
+              todos
+                .filter((list) => list.completed)
+                .map((list) => {
+                  return (ulList.innerHTML += `<li> ${list.todo} </li>`);
+                });
+            }
+            if (selectedValue === "notCompleted") {
+              todos
+                .filter((list) => !list.completed)
+                .map((list) => {
+                  return (ulList.innerHTML += `<li> ${list.todo} </li>`);
+                });
+            }
+          } catch (error) {
+            console.log(error);
+          }
+        }
+      fetchData();
+      }
+      window.onload = getData()
+
+    </script>
   </body>
 </html>
