@@ -6,8 +6,8 @@
     <title>Document</title>
   </head>
   <style>
-    *{
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    * {
+      font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
     }
   </style>
 
@@ -18,46 +18,37 @@
       <option value="notCompleted">Not Completed</option>
     </select>
     <button onclick="getData()">Search</button>
-    <ul id="list"></ul>
+    <ul id="filterList"></ul>
 
     <script>
-      let ulList = document.getElementById("list");
+      let ulList = document.getElementById("filterList");
 
       function getData() {
         let selectedValue = document.getElementById("menu").value;
+        console.log(selectedValue);
         async function fetchData() {
           try {
             const todoData = await fetch("https://dummyjson.com/todos");
             const todoDataJson = await todoData.json();
             const todos = await todoDataJson.todos;
-            ulList.innerHTML = "";
-            if (selectedValue === "all") {
-              todos.map((list) => {
-                return (ulList.innerHTML += `<li> ${list.todo} </li>`);
-              });
-            }
+            let filteredTodos = todos;
             if (selectedValue === "completed") {
-              todos
-                .filter((list) => list.completed)
-                .map((list) => {
-                  return (ulList.innerHTML += `<li> ${list.todo} </li>`);
-                });
+              filteredTodos = todos.filter((list) => list.completed);
+            } else if (selectedValue === "notCompleted") {
+              filteredTodos = todos.filter((list) => !list.completed);
             }
-            if (selectedValue === "notCompleted") {
-              todos
-                .filter((list) => !list.completed)
-                .map((list) => {
-                  return (ulList.innerHTML += `<li> ${list.todo} </li>`);
-                });
-            }
+            const htmlList = filteredTodos.map((list)=>{
+              return `<li>${list.todo}</li>`
+            })
+
+          ulList.innerHTML = htmlList
+            
           } catch (error) {
             console.log(error);
           }
         }
-      fetchData();
+        fetchData();
       }
-      window.onload = getData()
-
     </script>
   </body>
 </html>
