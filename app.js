@@ -1,10 +1,10 @@
 let arr = [1, 2, 3, 4, 5];
-// let newArr = arr.filter((num) => num < 3)
-let newArr = [];
+let newArr = arr.filter((num) => num < 3)
+let newArrr = [];
 
 arr.forEach((num) => {
   if (num > 2) {
-    newArr.push(num);
+    newArrr.push(num);
   }
 });
 console.log(newArr);
@@ -113,6 +113,7 @@ promiseFour
     console.log(error);
   })
   .finally(() => console.log("successful"));
+
 let promiseFive = new Promise((resolve, reject) => {
   setTimeout(() => {
     let error = true;
@@ -185,7 +186,6 @@ new Promise((resolve, reject) => {
     console.log("Fetch by coordinates complete.");
   });
 
-
                      // Weather Fetch Based on City Name
 let cityName = "faisalabad";
 const citySearchUrl = `https://api.openweathermap.org/data/2.5/weather?q=${cityName}&appid=244006e372fb520e56e50b3032f7bcf1&units=metric`;
@@ -204,3 +204,48 @@ async function getWeather() {
   }
 }
 getWeather();
+
+// let arr = [1, 2, 3, 4, -5, 3, -9, -2, 6, 7, 9];
+// let pos = arr
+//   .filter((num) => num > 0).reduce((acc,num)=>{
+//     return acc + num
+//   },0)
+//   console.log(pos);
+
+// 1. Example Input: [10, 20, 30, 40, 50]
+// Output: 60 (20 + 40)
+let Input = [10, 20, 30, 40, 50]
+let ans = Input.filter((value,index)=> index % 2 !== 0).reduce((acc,value)=>{
+  return acc + value
+},0)
+console.log(ans);
+
+// 2.Example Input: [10, 5, 20, 15, 30]
+// Output: 20
+let Arr = [10, 5, 20, 15, 30];
+let secondLargest = Arr.sort((a,b)=> b-a)[1];
+console.log(secondLargest);
+
+// 3. Example Input: [1, 2, 3, 4, 5, 6]
+// Output: { even: [2, 4, 6], odd: [1, 3, 5] }
+let arrr = [1, 2, 3, 4, 5, 6];
+let obj = {
+  even: arrr.filter((value)=> value % 2 !== 0),
+  odd: arrr.filter((value)=> value % 2 === 0)
+}
+console.log(obj);
+
+// 4. Example Input: ['a', 'b', 'a', 'c', 'b', 'a']
+// Output: { a: 3, b: 2, c: 1 }
+
+function countFrequency(arr) {
+  return arr.reduce((acc, value) => {
+    
+    acc[value] = (acc[value] || 0) + 1;
+  
+  console.log(acc);
+  
+    return acc;
+  }, {});
+}
+countFrequency(["a", "b", "a", "c", "b", "a"]);
