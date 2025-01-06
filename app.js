@@ -261,5 +261,22 @@
 // }
 
 // let ans = flattenArray([1, [2, [3, [4]], 5]])
-console.log(ans);
+// console.log(ans);
 
+// let arr = ["b", "c", "y", "j",'o'];
+// let vowels = ["a", "e", "i", "o", "u"];
+// let count = 0;
+// for (let i = 0; i < arr.length; i++) {
+//  if(vowels.includes(arr[i])){
+//     count++
+//  }
+// }
+// console.log(count);
+
+let arr = [1,2,3,4,5]
+let arr2 = arr.forEach((num) => {
+   console.log(num + 1);
+   return num + 1
+   
+})
+console.log(arr2);
