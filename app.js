@@ -273,10 +273,10 @@
 // }
 // console.log(count);
 
-let arr = [1,2,3,4,5]
-let arr2 = arr.forEach((num) => {
-   console.log(num + 1);
-   return num + 1
-   
-})
-console.log(arr2);
+// let arr = [1,2,3,4,5]
+// let arr2 = arr.forEach((num) => {
+//    console.log(num + 1);
+//    return num + 1
+
+// })
+// console.log(arr2);
